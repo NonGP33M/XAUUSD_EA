@@ -1,6 +1,6 @@
 #property strict
 
-input string InpFileName = "xau_m5_candidates_ea3.csv";
+input string InpFileName = "xau_m5_candidates_ea4.csv";
 input int    InpLookbackCandles = 10;
 
 input int    EMA_period = 200;
