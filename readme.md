@@ -1,11 +1,11 @@
-# XAUUSD Expert Advisors (EA0 – EA4)
+# 🤖 XAUUSD Expert Advisors (EA0 – EA4)
 
 Collection of MT5 Expert Advisors for M5-based trading on XAUUSD.  
 All EAs use `#property strict` and `CTrade` from `<Trade/Trade.mqh>`.
 
 <p>&nbsp;</p>
 
-# EA0 – MTF EMA Pullback (Risk-Based)
+# EA0 – MTF EMA Pullback (Risk-Based) 📐
 
 ## Concept
 
@@ -21,21 +21,21 @@ Multi-timeframe EMA trend-following with M5 pullback entry.
 
 ## Entry Logic
 
-### BUY
+### 🟢 BUY
 
 - M15 trend = BULL
 - H1 trend = BULL
 - Previous M5 close below EMA20
 - Current M5 close above EMA20
 
-### SELL
+### 🔴 SELL
 
 - M15 trend = BEAR
 - H1 trend = BEAR
 - Previous M5 close above EMA20
 - Current M5 close below EMA20
 
-## Risk & Management
+## ⚙️ Risk & Management
 
 - Lot size calculated from `RiskPct`
 - SL / TP fixed in points
@@ -50,7 +50,7 @@ Baseline structured trend-pullback system with controlled risk.
 
 <p>&nbsp;</p>
 
-# EA1 – MTF Pullback + Momentum Break
+# EA1 – MTF Pullback + Momentum Break 💥
 
 ## Concept
 
@@ -63,21 +63,21 @@ Adds:
 
 ## Entry Logic
 
-### BUY
+### 🟢 BUY
 
 - M15 & H1 trend aligned bullish
 - Previous candle touches/pierces EMA20
 - Current candle breaks previous high
 - Body size ≥ `MinBodyPts`
 
-### SELL
+### 🔴 SELL
 
 - M15 & H1 trend aligned bearish
 - Previous candle touches/pierces EMA20
 - Current candle breaks previous low
 - Body size ≥ `MinBodyPts`
 
-## Risk & Management
+## ⚙️ Risk & Management
 
 - Risk-based lot sizing
 - Early profit exit
@@ -85,7 +85,7 @@ Adds:
 - Spread filter
 - MaxPositions control
 
-## Tuning
+## 🎛️ Tuning
 
 - Lower `MinBodyPts` → more trades
 - Raise `MinBodyPts` → fewer, stronger trades
@@ -96,7 +96,7 @@ Momentum-confirmed pullback entries. Cleaner than EA0.
 
 <p>&nbsp;</p>
 
-# EA2 – Simple Signal + SL Session Stop
+# EA2 – Simple Signal + SL Session Stop 🛡️
 
 ## Concept
 
@@ -109,7 +109,7 @@ Signal:
 
 No trend filter.
 
-## Risk & Management
+## ⚙️ Risk & Management
 
 - Fixed lot
 - Fixed SL / TP
@@ -119,7 +119,7 @@ No trend filter.
   - `"session"` (Asia/Europe/America)
   - `"day"`
 
-## Key Feature
+## 🔑 Key Feature
 
 Safe SL counter using deal history to avoid double counting.
 
@@ -129,7 +129,7 @@ Risk control experiment. Focused on capital protection.
 
 <p>&nbsp;</p>
 
-# EA3 – Structured MTF + Session SL Limit
+# EA3 – Structured MTF + Session SL Limit 🏗️
 
 ## Concept
 
@@ -152,7 +152,7 @@ Uses closed candle confirmation:
 - Break continuation candle
 - Body ≥ `MinBodyPts`
 
-## Risk & Management
+## ⚙️ Risk & Management
 
 - Fixed SL / TP
 - Time exit
@@ -165,7 +165,7 @@ Controlled structured trading with built-in damage limiter.
 
 <p>&nbsp;</p>
 
-# EA4 – EMA200 Momentum + Session Block + 1 Position Only
+# EA4 – EMA200 Momentum + Session Block + 1 Position Only ⚡
 
 ## Concept
 
@@ -178,7 +178,7 @@ Signal rules:
 - Close above EMA200 + bullish continuation → BUY
 - Close below EMA200 + bearish continuation → SELL
 
-## Constraints
+## 🚧 Constraints
 
 - Only 1 open position at a time
 - Fixed lot
@@ -186,7 +186,7 @@ Signal rules:
 - Time exit
 - Block after `SL_TO_STOP`
 
-## Risk & Management
+## ⚙️ Risk & Management
 
 - Fixed SL / TP
 - Session/day block reset
@@ -198,28 +198,28 @@ High-momentum directional trades with strict shutdown logic.
 
 <p>&nbsp;</p>
 
-# Summary Comparison
+# 📊 Summary Comparison
 
 | EA  | Trend Filter | Momentum Filter | Risk Model | SL Shutdown | Max Positions |
 | --- | ------------ | --------------- | ---------- | ----------- | ------------- |
-| EA0 | M15 + H1 EMA | Basic cross     | % Risk     | No          | Yes           |
-| EA1 | M15 + H1 EMA | Body + Break    | % Risk     | No          | Yes           |
-| EA2 | None         | None            | Fixed Lot  | Yes         | No limit      |
-| EA3 | M15 + H1 EMA | Body Filter     | Fixed Lot  | Yes         | Yes           |
-| EA4 | EMA200 (M5)  | Large Body      | Fixed Lot  | Yes         | 1 only        |
+| EA0 | M15 + H1 EMA | Basic cross     | % Risk     | ❌          | ✅            |
+| EA1 | M15 + H1 EMA | Body + Break    | % Risk     | ❌          | ✅            |
+| EA2 | None         | None            | Fixed Lot  | ✅          | No limit      |
+| EA3 | M15 + H1 EMA | Body Filter     | Fixed Lot  | ✅          | ✅            |
+| EA4 | EMA200 (M5)  | Large Body      | Fixed Lot  | ✅          | 1 only        |
 
 <p>&nbsp;</p>
 
-# Notes
+# 📝 Notes
 
 - Designed primarily for XAUUSD M5.
-- All EAs include time-based exit.
+- All EAs include time-based exit ⏱️
 - Spread filter used where relevant.
 - SL shutdown logic prevents overtrading during bad conditions.
 
 <p>&nbsp;</p>
 
-**Progression Path**
+**📈 Progression Path**
 
 EA0 → Structure foundation  
 EA1 → Momentum refinement  
@@ -235,7 +235,7 @@ EA4 → Momentum + strict discipline
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 
-# XAUUSD EA Backtest Report
+# 📋 XAUUSD EA Backtest Report
 
 Period tested: 2026-01-02 → 2026-02-20  
 Initial balance: $100  
@@ -243,9 +243,9 @@ Timeframe: M5
 
 ---
 
-# EA0 – MTF EMA Pullback (Structured Trend)
+# EA0 – MTF EMA Pullback (Structured Trend) 📐
 
-## Best Configuration
+## ✅ Best Configuration
 
 SL = 1200  
 TP = 1800  
@@ -253,22 +253,22 @@ MAX_MINUTES = 60
 EARLY_MINUTES = 15  
 SL_TO_STOP = 1
 
-## Results
+## 📊 Results
 
 End Balance: $269.90  
 Total PnL: +169.90  
 Trades: 290  
-Winrate: 78.62%  
+Winrate: 78.62% 🎯  
 Max Drawdown: 72.76  
 Score: 2.33
 
 <div style="display:flex; gap:10px;">
-  <img src="backtest_img/ea0_eq_curve_20260101-20260220.png" height="250">
-  <img src="backtest_img/ea0_net_session_20260101-20260220.png" height="250">
-  <img src="backtest_img/ea0_daily_pnl_20260101-20260220.png" height="250">
+  <img src="backtest_img/ea0_eq_curve_20260101-20260220.png" height="220">
+  <img src="backtest_img/ea0_net_session_20260101-20260220.png" height="220">
+  <img src="backtest_img/ea0_daily_pnl_20260101-20260220.png" height="220">
 </div>
 
-## Notes
+## 🗒️ Notes
 
 - Very high winrate
 - Controlled drawdown
@@ -279,9 +279,9 @@ EA0 is stable but not explosive.
 
 <p>&nbsp;</p>
 
-# EA1 – MTF Pullback + Momentum Break
+# EA1 – MTF Pullback + Momentum Break 💥
 
-## Best Configuration
+## ✅ Best Configuration
 
 SL = 1500  
 TP = 1500  
@@ -289,7 +289,7 @@ MAX_MINUTES = 60
 EARLY_MINUTES = 60  
 SL_TO_STOP = 1
 
-## Results
+## 📊 Results
 
 End Balance: $1605.36  
 Total PnL: +1505.36  
@@ -299,19 +299,19 @@ Max Drawdown: 125.74
 Score: 11.97
 
 <div style="display:flex; gap:10px;">
-  <img src="backtest_img/ea1_eq_curve_20260101-20260220.png" height="250">
-  <img src="backtest_img/ea1_net_session_20260101-20260220.png" height="250">
-  <img src="backtest_img/ea1_daily_pnl_20260101-20260220.png" height="250">
+  <img src="backtest_img/ea1_eq_curve_20260101-20260220.png" height="220">
+  <img src="backtest_img/ea1_net_session_20260101-20260220.png" height="220">
+  <img src="backtest_img/ea1_daily_pnl_20260101-20260220.png" height="220">
 </div>
 
-## Without SL Stop
+## Without SL Stop ⚠️
 
 End Balance: $1301.40  
 Trades: 1342  
 Winrate: 36.58%  
 Max DD: 228.53
 
-## Notes
+## 🗒️ Notes
 
 - Performs well only with SL_TO_STOP = 1
 - Regime-sensitive
@@ -321,9 +321,9 @@ EA1 needs shutdown logic to survive.
 
 <p>&nbsp;</p>
 
-# EA2 – Simple Directional Logic
+# EA2 – Simple Directional Logic 🎲
 
-## Best Configuration
+## ✅ Best Configuration
 
 SL = 500  
 TP = 1800  
@@ -331,7 +331,7 @@ MAX_MINUTES = 60
 EARLY_MINUTES = 15  
 SL_TO_STOP = 10
 
-## Results
+## 📊 Results
 
 End Balance: $4426.69  
 Total PnL: +4326.69  
@@ -341,25 +341,25 @@ Max Drawdown: 271.65
 Score: 15.96
 
 <div style="display:flex; gap:10px;">
-  <img src="backtest_img/ea2_eq_curve_20260101-20260220.png" height="250">
-  <img src="backtest_img/ea2_net_session_20260101-20260220.png" height="250">
-  <img src="backtest_img/ea2_daily_pnl_20260101-20260220.png" height="250">
+  <img src="backtest_img/ea2_eq_curve_20260101-20260220.png" height="220">
+  <img src="backtest_img/ea2_net_session_20260101-20260220.png" height="220">
+  <img src="backtest_img/ea2_daily_pnl_20260101-20260220.png" height="220">
 </div>
 
-## Notes
+## 🗒️ Notes
 
 - Extremely high trade frequency
 - Small edge per trade
 - Large exposure
-- Likely fragile live (spread/slippage sensitive)
+- Likely fragile live (spread/slippage sensitive) ⚠️
 
 High profit, high structural risk.
 
 <p>&nbsp;</p>
 
-# EA3 – Structured MTF + Session Stop
+# EA3 – Structured MTF + Session Stop 🏗️
 
-## Best Configuration
+## ✅ Best Configuration
 
 SL = 1200  
 TP = 1500  
@@ -367,7 +367,7 @@ MAX_MINUTES = 60
 EARLY_MINUTES = 60  
 SL_TO_STOP = 1
 
-## Results
+## 📊 Results
 
 End Balance: $821.06  
 Total PnL: +721.06  
@@ -377,12 +377,12 @@ Max Drawdown: 97.92
 Score: 7.36
 
 <div style="display:flex; gap:10px;">
-  <img src="backtest_img/ea3_eq_curve_20260101-20260220.png" height="250">
-  <img src="backtest_img/ea3_net_session_20260101-20260220.png" height="250">
-  <img src="backtest_img/ea3_daily_pnl_20260101-20260220.png" height="250">
+  <img src="backtest_img/ea3_eq_curve_20260101-20260220.png" height="220">
+  <img src="backtest_img/ea3_net_session_20260101-20260220.png" height="220">
+  <img src="backtest_img/ea3_daily_pnl_20260101-20260220.png" height="220">
 </div>
 
-## Notes
+## 🗒️ Notes
 
 - Balanced profile
 - Controlled drawdown
@@ -393,9 +393,9 @@ EA3 is the most stable structured system.
 
 <p>&nbsp;</p>
 
-# EA4 – EMA200 Momentum Continuation
+# EA4 – EMA200 Momentum Continuation ⚡
 
-## Best Configuration
+## ✅ Best Configuration
 
 SL = 500  
 TP = 1500  
@@ -403,48 +403,48 @@ MAX_MINUTES = 60
 EARLY_MINUTES = 60  
 SL_TO_STOP = 1
 
-## Results
+## 📊 Results
 
 End Balance: $1158.58  
 Total PnL: +1058.58  
 Trades: 273  
 Winrate: 54.58%  
 Max Drawdown: 37.26  
-Score: 28.41
+Score: 28.41 🏆
 
 <div style="display:flex; gap:10px;">
-  <img src="backtest_img/ea4_eq_curve_20260101-20260220.png" height="250">
-  <img src="backtest_img/ea4_net_session_20260101-20260220.png" height="250">
-  <img src="backtest_img/ea4_daily_pnl_20260101-20260220.png" height="250">
+  <img src="backtest_img/ea4_eq_curve_20260101-20260220.png" height="220">
+  <img src="backtest_img/ea4_net_session_20260101-20260220.png" height="220">
+  <img src="backtest_img/ea4_daily_pnl_20260101-20260220.png" height="220">
 </div>
 
-## Notes
+## 🗒️ Notes
 
 - Strong asymmetry
 - Very low drawdown
 - Clean momentum behavior
 - Performs well even with limited trades
 
-EA4 shows highest risk efficiency in this period.
+EA4 shows highest risk efficiency in this period. 🥇
 
 <p>&nbsp;</p>
 
-# Overall Summary
+# 🏁 Overall Summary
 
-| EA  | PnL   | MaxDD | Winrate | Trades | Profile                      |
-| --- | ----- | ----- | ------- | ------ | ---------------------------- |
-| EA0 | +169  | 72    | 78%     | 290    | Defensive                    |
-| EA1 | +1505 | 125   | 61%     | 546    | Aggressive, regime-sensitive |
-| EA2 | +4326 | 271   | 54%     | 9246   | Overtrading, fragile         |
-| EA3 | +721  | 97    | 58%     | 374    | Balanced                     |
-| EA4 | +1058 | 37    | 54%     | 273    | Best risk efficiency         |
+| EA  | PnL   | MaxDD | Winrate | Trades | Profile                         |
+| --- | ----- | ----- | ------- | ------ | ------------------------------- |
+| EA0 | +169  | 72    | 78% 🎯  | 290    | 🛡️ Defensive                    |
+| EA1 | +1505 | 125   | 61%     | 546    | ⚡ Aggressive, regime-sensitive |
+| EA2 | +4326 | 271   | 54%     | 9246   | 🎲 Overtrading, fragile         |
+| EA3 | +721  | 97    | 58%     | 374    | ⚖️ Balanced                     |
+| EA4 | +1058 | 37    | 54%     | 273    | 🏆 Best risk efficiency         |
 
 ---
 
-# Conclusion
+# 🏁 Conclusion
 
-Primary candidate: **EA4**  
-Secondary stabilizer: **EA3**  
-Experimental: EA1 (requires strict stop control)  
-Defensive baseline: EA0  
-High-risk engine: EA2
+🥇 Primary candidate: **EA4**  
+🥈 Secondary stabilizer: **EA3**  
+🧪 Experimental: EA1 (requires strict stop control)  
+🛡️ Defensive baseline: EA0  
+🎲 High-risk engine: EA2
