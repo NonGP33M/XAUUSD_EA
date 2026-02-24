@@ -7,23 +7,25 @@ CTrade trade;
 input long   MagicNumber      = 20260222;
 input double FixedLot         = 0.01;
 
-input int    SL_PTS           = 1200;
-input int    TP_PTS           = 1500;
-input int    MAX_MINUTES      = 60;
+input int    SL_PTS           = 500;
+input int    TP_PTS           = 1800;
+input int    MAX_MINUTES      = 30;
 
 input int    SL_TO_STOP       = 2;
 input string STOP_MODE        = "session"; // "session" or "day"
 
+input int    MinBodyPts       = 150;
+input int    MaxPositions     = 1;
+
 input bool   DebugMode        = true;
 
 // ===== State =====
-datetime g_lastM5 = 0;
+datetime g_lastM5             = 0;
+int      g_slStreak           = 0;   // consecutive SLs (resets on any non-SL close)
+string   g_blockKey           = "";
+bool     g_blocked            = false;
 
-int      g_slCount   = 0;
-string   g_blockKey  = "";
-bool     g_blocked   = false;
-
-ulong    g_lastSLDealTicket = 0;   // prevent double SL count
+ulong    g_lastDealTicket     = 0;   // last processed deal (SL or non-SL)
 
 // =========================================
 int hEma200;
@@ -61,7 +63,7 @@ string GetBlockKey()
    return date + "_" + GetSession();
 }
 
-// ===== SIGNAL (REPLACE WITH YOUR REAL LOGIC) =====
+// ===== SIGNAL =====
 
 string GetSignal()
 {
@@ -70,13 +72,13 @@ string GetSignal()
    double open1  = iOpen(_Symbol, PERIOD_M5, 1);
 
    double buf[];
-   if(CopyBuffer(hEma200,0,1,1,buf)!=1)
+   if(CopyBuffer(hEma200, 0, 1, 1, buf) != 1)
       return "";
 
    double ema200 = buf[0];
 
    double body = MathAbs(close1 - open1);
-   if(body < 300 * _Point)
+   if(body < MinBodyPts * _Point)
       return "";
 
    if(close1 > ema200 && close1 > close2)
@@ -88,42 +90,72 @@ string GetSignal()
    return "";
 }
 
-// ===== SAFE SL COUNTER =====
+// ===== STREAK-BASED SL COUNTER =====
 
 void UpdateSLCounter()
 {
-   HistorySelect(0, TimeCurrent());
+   HistorySelect(TimeCurrent() - 7 * 24 * 3600, TimeCurrent());
    int total = HistoryDealsTotal();
 
-   for(int i = total-1; i >= 0; i--)
+   for(int i = total - 1; i >= 0; i--)
    {
       ulong deal = HistoryDealGetTicket(i);
 
-      if(deal == g_lastSLDealTicket)
+      if(deal == g_lastDealTicket)
          break;  // already processed
 
       if(HistoryDealGetInteger(deal, DEAL_MAGIC) != MagicNumber)
          continue;
 
-      if(HistoryDealGetInteger(deal, DEAL_REASON) == DEAL_REASON_SL)
+      // only care about closing deals (not entries)
+      long dealEntry = HistoryDealGetInteger(deal, DEAL_ENTRY);
+      if(dealEntry != DEAL_ENTRY_OUT)
+         continue;
+
+      long dealReason = HistoryDealGetInteger(deal, DEAL_REASON);
+
+      if(dealReason == DEAL_REASON_SL)
       {
-         g_slCount++;
-         g_lastSLDealTicket = deal;
+         g_slStreak++;
 
          if(DebugMode)
-            Print("SL detected. Count = ", g_slCount);
+            Print("SL detected. Streak = ", g_slStreak);
 
-         if(g_slCount >= SL_TO_STOP)
+         if(g_slStreak >= SL_TO_STOP)
          {
             g_blocked = true;
 
             if(DebugMode)
                Print("Trading BLOCKED for ", g_blockKey);
          }
-
-         break;
       }
+      else
+      {
+         // TP, time exit, manual — resets streak
+         g_slStreak = 0;
+
+         if(DebugMode)
+            Print("Non-SL close. Streak reset.");
+      }
+
+      g_lastDealTicket = deal;
+      break;
    }
+}
+
+// ===== COUNT OPEN POSITIONS =====
+
+int CountPositions()
+{
+   int count = 0;
+   for(int i = 0; i < PositionsTotal(); i++)
+   {
+      ulong ticket = PositionGetTicket(i);
+      if(ticket > 0 && PositionSelectByTicket(ticket))
+         if(PositionGetInteger(POSITION_MAGIC) == MagicNumber)
+            count++;
+   }
+   return count;
 }
 
 // ===== POSITION MANAGEMENT =====
@@ -132,7 +164,7 @@ void ManagePositions()
 {
    datetime now = TimeCurrent();
 
-   for(int i = PositionsTotal()-1; i >= 0; i--)
+   for(int i = PositionsTotal() - 1; i >= 0; i--)
    {
       ulong ticket = PositionGetTicket(i);
       if(!PositionSelectByTicket(ticket)) continue;
@@ -159,16 +191,15 @@ void TryOpenTrade()
    if(g_blocked)
    {
       if(DebugMode)
-         Print("Trading blocked due to SL limit.");
+         Print("Trading blocked due to SL streak.");
       return;
    }
-   
-    // ===== Only 1 position at a time =====
-   for(int i=0;i<PositionsTotal();i++)
+
+   if(CountPositions() >= MaxPositions)
    {
-      if(PositionGetTicket(i) > 0 &&
-         PositionGetInteger(POSITION_MAGIC) == MagicNumber)
-         return;
+      if(DebugMode)
+         Print("Max positions reached: ", MaxPositions);
+      return;
    }
 
    string side = GetSignal();
@@ -179,8 +210,6 @@ void TryOpenTrade()
 
    double sl, tp;
 
-   trade.SetExpertMagicNumber(MagicNumber);
-
    if(side == "BUY")
    {
       sl = ask - SL_PTS * _Point;
@@ -188,7 +217,7 @@ void TryOpenTrade()
 
       if(trade.Buy(FixedLot, _Symbol, 0, sl, tp))
          if(DebugMode)
-            Print("BUY opened at ", ask);
+            Print("BUY opened at ", ask, " | Streak = ", g_slStreak);
    }
    else
    {
@@ -197,7 +226,7 @@ void TryOpenTrade()
 
       if(trade.Sell(FixedLot, _Symbol, 0, sl, tp))
          if(DebugMode)
-            Print("SELL opened at ", bid);
+            Print("SELL opened at ", bid, " | Streak = ", g_slStreak);
    }
 }
 
@@ -207,9 +236,14 @@ int OnInit()
 {
    hEma200 = iMA(_Symbol, PERIOD_M5, 200, 0, MODE_EMA, PRICE_CLOSE);
    trade.SetExpertMagicNumber(MagicNumber);
-   g_lastM5 = iTime(_Symbol, PERIOD_M5, 0);
+   g_lastM5   = iTime(_Symbol, PERIOD_M5, 0);
    g_blockKey = GetBlockKey();
    return INIT_SUCCEEDED;
+}
+
+void OnDeinit(const int reason)
+{
+   IndicatorRelease(hEma200);
 }
 
 void OnTick()
@@ -220,12 +254,12 @@ void OnTick()
    string key = GetBlockKey();
    if(key != g_blockKey)
    {
-      g_blockKey = key;
-      g_slCount = 0;
-      g_blocked = false;
+      g_blockKey  = key;
+      g_slStreak  = 0;
+      g_blocked   = false;
 
       if(DebugMode)
-         Print("New session/day. Reset SL counter.");
+         Print("New session/day. Reset SL streak.");
    }
 
    UpdateSLCounter();
