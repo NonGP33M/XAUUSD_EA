@@ -25,9 +25,11 @@ Winrate: 78.62%
 Max Drawdown: 72.76  
 Score: 2.33
 
-<img src="../backtest_img/ea0_eq_curve_20260101-20260220.png" alt="Alt text" width="300" />
-<img src="../backtest_img/ea0_net_session_20260101-20260220.png" alt="Alt text" width="268" />
-<img src="../backtest_img/ea0_daily_pnl_20260101-20260220.png" alt="Alt text" width="258" />
+<div style="display:flex; gap:10px;">
+  <img src="../backtest_img/ea0_eq_curve_20260101-20260220.png" width="400">
+  <img src="../backtest_img/ea0_net_session_20260101-20260220.png" width="400">
+  <img src="../backtest_img/ea0_daily_pnl_20260101-20260220.png" width="400">
+</div>
 
 ## Notes
 
@@ -59,9 +61,11 @@ Winrate: 61.54%
 Max Drawdown: 125.74  
 Score: 11.97
 
-<img src="../backtest_img/ea1_eq_curve_20260101-20260220.png" alt="Alt text" width="300" />
-<img src="../backtest_img/ea1_net_session_20260101-20260220.png" alt="Alt text" width="268" />
-<img src="../backtest_img/ea1_daily_pnl_20260101-20260220.png" alt="Alt text" width="258" />
+<div style="display:flex; gap:10px;">
+  <img src="../backtest_img/ea1_eq_curve_20260101-20260220.png" width="400">
+  <img src="../backtest_img/ea1_net_session_20260101-20260220.png" width="400">
+  <img src="../backtest_img/ea1_daily_pnl_20260101-20260220.png" width="400">
+</div>
 
 ## Without SL Stop
 
@@ -99,9 +103,11 @@ Winrate: 54.42%
 Max Drawdown: 271.65  
 Score: 15.96
 
-<img src="../backtest_img/ea2_eq_curve_20260101-20260220.png" alt="Alt text" width="300" />
-<img src="../backtest_img/ea2_net_session_20260101-20260220.png" alt="Alt text" width="270" />
-<img src="../backtest_img/ea2_daily_pnl_20260101-20260220.png" alt="Alt text" width="262" />
+<div style="display:flex; gap:10px;">
+  <img src="../backtest_img/ea2_eq_curve_20260101-20260220.png" width="400">
+  <img src="../backtest_img/ea2_net_session_20260101-20260220.png" width="400">
+  <img src="../backtest_img/ea2_daily_pnl_20260101-20260220.png" width="400">
+</div>
 
 ## Notes
 
@@ -133,9 +139,11 @@ Winrate: 58.02%
 Max Drawdown: 97.92  
 Score: 7.36
 
-<img src="../backtest_img/ea3_eq_curve_20260101-20260220.png" alt="Alt text" width="300" />
-<img src="../backtest_img/ea3_net_session_20260101-20260220.png" alt="Alt text" width="270" />
-<img src="../backtest_img/ea3_daily_pnl_20260101-20260220.png" alt="Alt text" width="260" />
+<div style="display:flex; gap:10px;">
+  <img src="../backtest_img/ea3_eq_curve_20260101-20260220.png" width="400">
+  <img src="../backtest_img/ea3_net_session_20260101-20260220.png" width="400">
+  <img src="../backtest_img/ea3_daily_pnl_20260101-20260220.png" width="400">
+</div>
 
 ## Notes
 
@@ -167,9 +175,11 @@ Winrate: 54.58%
 Max Drawdown: 37.26  
 Score: 28.41
 
-<img src="../backtest_img/ea4_eq_curve_20260101-20260220.png" alt="Alt text" width="302" />
-<img src="../backtest_img/ea4_net_session_20260101-20260220.png" alt="Alt text" width="273" />
-<img src="../backtest_img/ea4_daily_pnl_20260101-20260220.png" alt="Alt text" width="258" />
+<div style="display:flex; gap:10px;">
+  <img src="../backtest_img/ea4_eq_curve_20260101-20260220.png" width="400">
+  <img src="../backtest_img/ea4_net_session_20260101-20260220.png" width="400">
+  <img src="../backtest_img/ea4_daily_pnl_20260101-20260220.png" width="400">
+</div>
 
 ## Notes
 

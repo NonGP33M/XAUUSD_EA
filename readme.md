@@ -3,7 +3,7 @@
 Collection of MT5 Expert Advisors for M5-based trading on XAUUSD.  
 All EAs use `#property strict` and `CTrade` from `<Trade/Trade.mqh>`.
 
----
+<p>&nbsp;</p>
 
 # EA0 – MTF EMA Pullback (Risk-Based)
 
@@ -48,7 +48,7 @@ Multi-timeframe EMA trend-following with M5 pullback entry.
 
 Baseline structured trend-pullback system with controlled risk.
 
----
+<p>&nbsp;</p>
 
 # EA1 – MTF Pullback + Momentum Break
 
@@ -94,7 +94,7 @@ Adds:
 
 Momentum-confirmed pullback entries. Cleaner than EA0.
 
----
+<p>&nbsp;</p>
 
 # EA2 – Simple Signal + SL Session Stop
 
@@ -127,7 +127,7 @@ Safe SL counter using deal history to avoid double counting.
 
 Risk control experiment. Focused on capital protection.
 
----
+<p>&nbsp;</p>
 
 # EA3 – Structured MTF + Session SL Limit
 
@@ -163,7 +163,7 @@ Uses closed candle confirmation:
 
 Controlled structured trading with built-in damage limiter.
 
----
+<p>&nbsp;</p>
 
 # EA4 – EMA200 Momentum + Session Block + 1 Position Only
 
@@ -196,7 +196,7 @@ Signal rules:
 
 High-momentum directional trades with strict shutdown logic.
 
----
+<p>&nbsp;</p>
 
 # Summary Comparison
 
@@ -208,7 +208,7 @@ High-momentum directional trades with strict shutdown logic.
 | EA3 | M15 + H1 EMA | Body Filter     | Fixed Lot  | Yes         | Yes           |
 | EA4 | EMA200 (M5)  | Large Body      | Fixed Lot  | Yes         | 1 only        |
 
----
+<p>&nbsp;</p>
 
 # Notes
 
@@ -217,7 +217,7 @@ High-momentum directional trades with strict shutdown logic.
 - Spread filter used where relevant.
 - SL shutdown logic prevents overtrading during bad conditions.
 
----
+<p>&nbsp;</p>
 
 **Progression Path**
 
@@ -226,6 +226,14 @@ EA1 → Momentum refinement
 EA2 → Capital protection experiment  
 EA3 → Structured + session risk control  
 EA4 → Momentum + strict discipline
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+---
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 
 # XAUUSD EA Backtest Report
 
@@ -254,9 +262,11 @@ Winrate: 78.62%
 Max Drawdown: 72.76  
 Score: 2.33
 
-<img src="backtest_img/ea0_eq_curve_20260101-20260220.png" alt="Alt text" width="300" />
-<img src="backtest_img/ea0_net_session_20260101-20260220.png" alt="Alt text" width="268" />
-<img src="backtest_img/ea0_daily_pnl_20260101-20260220.png" alt="Alt text" width="258" />
+<div style="display:flex; gap:10px;">
+  <img src="backtest_img/ea0_eq_curve_20260101-20260220.png" height="250">
+  <img src="backtest_img/ea0_net_session_20260101-20260220.png" height="250">
+  <img src="backtest_img/ea0_daily_pnl_20260101-20260220.png" height="250">
+</div>
 
 ## Notes
 
@@ -267,7 +277,7 @@ Score: 2.33
 
 EA0 is stable but not explosive.
 
----
+<p>&nbsp;</p>
 
 # EA1 – MTF Pullback + Momentum Break
 
@@ -288,9 +298,11 @@ Winrate: 61.54%
 Max Drawdown: 125.74  
 Score: 11.97
 
-<img src="backtest_img/ea1_eq_curve_20260101-20260220.png" alt="Alt text" width="300" />
-<img src="backtest_img/ea1_net_session_20260101-20260220.png" alt="Alt text" width="268" />
-<img src="backtest_img/ea1_daily_pnl_20260101-20260220.png" alt="Alt text" width="258" />
+<div style="display:flex; gap:10px;">
+  <img src="backtest_img/ea1_eq_curve_20260101-20260220.png" height="250">
+  <img src="backtest_img/ea1_net_session_20260101-20260220.png" height="250">
+  <img src="backtest_img/ea1_daily_pnl_20260101-20260220.png" height="250">
+</div>
 
 ## Without SL Stop
 
@@ -307,7 +319,7 @@ Max DD: 228.53
 
 EA1 needs shutdown logic to survive.
 
----
+<p>&nbsp;</p>
 
 # EA2 – Simple Directional Logic
 
@@ -328,9 +340,11 @@ Winrate: 54.42%
 Max Drawdown: 271.65  
 Score: 15.96
 
-<img src="backtest_img/ea2_eq_curve_20260101-20260220.png" alt="Alt text" width="300" />
-<img src="backtest_img/ea2_net_session_20260101-20260220.png" alt="Alt text" width="270" />
-<img src="backtest_img/ea2_daily_pnl_20260101-20260220.png" alt="Alt text" width="262" />
+<div style="display:flex; gap:10px;">
+  <img src="backtest_img/ea2_eq_curve_20260101-20260220.png" height="250">
+  <img src="backtest_img/ea2_net_session_20260101-20260220.png" height="250">
+  <img src="backtest_img/ea2_daily_pnl_20260101-20260220.png" height="250">
+</div>
 
 ## Notes
 
@@ -341,7 +355,7 @@ Score: 15.96
 
 High profit, high structural risk.
 
----
+<p>&nbsp;</p>
 
 # EA3 – Structured MTF + Session Stop
 
@@ -362,9 +376,11 @@ Winrate: 58.02%
 Max Drawdown: 97.92  
 Score: 7.36
 
-<img src="backtest_img/ea3_eq_curve_20260101-20260220.png" alt="Alt text" width="300" />
-<img src="backtest_img/ea3_net_session_20260101-20260220.png" alt="Alt text" width="270" />
-<img src="backtest_img/ea3_daily_pnl_20260101-20260220.png" alt="Alt text" width="260" />
+<div style="display:flex; gap:10px;">
+  <img src="backtest_img/ea3_eq_curve_20260101-20260220.png" height="250">
+  <img src="backtest_img/ea3_net_session_20260101-20260220.png" height="250">
+  <img src="backtest_img/ea3_daily_pnl_20260101-20260220.png" height="250">
+</div>
 
 ## Notes
 
@@ -375,7 +391,7 @@ Score: 7.36
 
 EA3 is the most stable structured system.
 
----
+<p>&nbsp;</p>
 
 # EA4 – EMA200 Momentum Continuation
 
@@ -396,9 +412,11 @@ Winrate: 54.58%
 Max Drawdown: 37.26  
 Score: 28.41
 
-<img src="backtest_img/ea4_eq_curve_20260101-20260220.png" alt="Alt text" width="302" />
-<img src="backtest_img/ea4_net_session_20260101-20260220.png" alt="Alt text" width="273" />
-<img src="backtest_img/ea4_daily_pnl_20260101-20260220.png" alt="Alt text" width="258" />
+<div style="display:flex; gap:10px;">
+  <img src="backtest_img/ea4_eq_curve_20260101-20260220.png" height="250">
+  <img src="backtest_img/ea4_net_session_20260101-20260220.png" height="250">
+  <img src="backtest_img/ea4_daily_pnl_20260101-20260220.png" height="250">
+</div>
 
 ## Notes
 
@@ -409,7 +427,7 @@ Score: 28.41
 
 EA4 shows highest risk efficiency in this period.
 
----
+<p>&nbsp;</p>
 
 # Overall Summary
 
