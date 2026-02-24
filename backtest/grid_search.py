@@ -4,7 +4,7 @@ import time
 from itertools import product
 
 # ========= FILES =========
-CAND_FILE = "./src_csv/xau_m5_candidates_ea3.csv"
+CAND_FILE = "./src_csv/xau_m5_candidates_ea0.csv"
 M1_FILE   = "./src_csv/m1_master.csv"
 
 POINT = 0.01
@@ -146,11 +146,12 @@ def run_param_set(sl, tp, max_m, early_m, sl_stop):
 
 
 # ========= GRID =========
-SL_LIST    = [800, 1200, 1500, 1800]
-TP_LIST    = [800, 1200, 1500, 1800]
+SL_LIST    = [500, 800, 1200, 1500, 1800]
+TP_LIST    = [500, 800, 1200, 1500, 1800]
 MAX_LIST   = [60]
 EARLY_LIST = [15,60]
-STOP_LIST  = [1, 2]
+STOP_LIST  = [1, 2, 100]
+# STOP_LIST  = [100]
 
 total = len(SL_LIST)*len(TP_LIST)*len(MAX_LIST)*len(EARLY_LIST)*len(STOP_LIST)
 
