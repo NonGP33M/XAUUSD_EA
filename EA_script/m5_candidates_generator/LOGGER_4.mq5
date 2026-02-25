@@ -4,7 +4,7 @@ input string InpFileName = "xau_m5_candidates_ea4.csv";
 input int    InpLookbackCandles = 10;
 
 input int    EMA_period = 200;
-input double MinBodyPts = 30;
+input double MinBodyPts = 300;
 
 datetime g_lastM5 = 0;
 int hEmaM5 = INVALID_HANDLE;

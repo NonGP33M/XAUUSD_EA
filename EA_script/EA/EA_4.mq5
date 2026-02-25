@@ -7,15 +7,15 @@ CTrade trade;
 input long   MagicNumber      = 20260222;
 input double FixedLot         = 0.01;
 
-input int    SL_PTS           = 500;
+input int    SL_PTS           = 100;
 input int    TP_PTS           = 1800;
-input int    MAX_MINUTES      = 30;
+input int    MAX_MINUTES      = 5;
 
-input int    SL_TO_STOP       = 2;
+input int    SL_TO_STOP       = 15;
 input string STOP_MODE        = "session"; // "session" or "day"
 
-input int    MinBodyPts       = 150;
-input int    MaxPositions     = 1;
+input int    MinBodyPts       = 300;
+input int    MaxPositions     = 2;
 
 input bool   DebugMode        = true;
 

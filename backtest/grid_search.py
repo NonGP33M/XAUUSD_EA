@@ -11,19 +11,19 @@ M1_FILE   = "./src_csv/m1_master.csv"
 POINT         = 0.01
 USD_PER_POINT = 0.01
 START_BALANCE = 100.0
-SPREAD_PTS    = 8
+SPREAD_PTS    = 50
 SPREAD        = SPREAD_PTS * POINT
 
-START_ALL = "2026-02-01 00:00"
-END_ALL   = "2026-02-20 23:59"
+START_ALL = "2026-02-23 00:00"
+END_ALL   = "2026-02-24 23:59"
 
 # ========= GRID =========
-SL_LIST       = [500, 800, 1200, 1500, 2000]
+SL_LIST       = [100, 200, 500, 800]
 TP_LIST       = [500, 800, 1200, 1500, 1800, 2000]
-MAX_LIST      = [15, 30, 60, 120]
-EARLY_LIST    = [15, 30, 60, 120]
-STOP_LIST     = [1, 2, 4, 10]
-MAX_POS_LIST  = [1, 2, 3, 4, 5]         # ← added to grid
+MAX_LIST      = [5, 10, 15, 30, 60]
+EARLY_LIST    = [5, 10, 15, 30, 60]
+STOP_LIST     = [1, 2, 5, 10, 15]
+MAX_POS_LIST  = [1, 2, 3, 4, 5, 10]         # ← added to grid
 FULL_TIME     = True
 
 # ========= LOAD =========
